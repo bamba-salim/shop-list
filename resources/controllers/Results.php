@@ -3,12 +3,12 @@
   
   class Results
   {
-    private $message;
-    private $response;
-    private $data;
-    private $nbResults;
+    public $message;
+    public $response;
+    public $data;
+    public $nbResults;
     
-  
+    
     /**
      * @return mixed
      */
@@ -16,7 +16,7 @@
     {
       return $this->message;
     }
-  
+    
     /**
      * @param mixed $message
      */
@@ -40,7 +40,7 @@
     {
       $this->response = $response;
     }
-  
+    
     /**
      * @return mixed
      */
@@ -48,22 +48,37 @@
     {
       return $this->data;
     }
-
+    
     public function setData($data): void
     {
-      $this->setNbResults($data);
       $this->data = $data;
+      $this->setNbResults($data);
+  
     }
-
+    
     public function getNbResults()
     {
-      return count($this->data);
+      return $this->nbResults;
     }
-
-    public function setNbResults($nbResults): void
+    
+    public function setNbResults($data): void
     {
-      $this->nbResults = count($nbResults);
+//      var_dump(gettype($data));
+      switch (gettype($data)) {
+        case "array":
+          $this->nbResults = count($data);
+          break;
+        case 'string';
+          $this->nbResults = 1;
+          break;
+        case null;
+          $this->nbResults = 0;
+          break;
+        default:
+          $this->nbResults = 0;
+        
+      }
     }
-  
-  
+    
+    
   }

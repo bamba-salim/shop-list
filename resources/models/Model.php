@@ -3,7 +3,7 @@
   
   abstract class Model
   {
-    protected function date(): string
+    protected function _date(): string
     {
       date_default_timezone_set('Europe/Paris');
       $date = new DateTime();

@@ -2,17 +2,9 @@
   require_once('./resources/config.php');
   require_once('./resources/controllers/UserController.php');
   require_once('./resources/bean/CreationUserFormBean.php');
-  
-  var_dump("get:");
-  var_dump( $_GET);
-  
-  var_dump("post:");
-  var_dump($_POST);
-  
-  var_dump("session:");
-  var_dump($_SESSION);
-  
-  extract($_POST);
+
+//  header('Content-Type: application/json');
+  header("Content-type: application/json; charset=utf-8");
   
   if (isset($_GET['add'])) {
     switch ($_GET['add']) {
@@ -20,8 +12,7 @@
         $formBean = new CreationUserFormBean();
         $formBean->setPassword($password);
         $formBean->setUsername($username);
-        $result = UserController::add_new_user($formBean);
-        var_dump($result);
+        $results = UserController::add_new_user($formBean);
         break;
       case 'list':
         var_dump('list');
@@ -39,11 +30,19 @@
   if (isset($_GET['log'])) {
     switch ($_GET['log']) {
       case 'user':
+        $data = json_decode(file_get_contents("php://input"));
+//        var_dump($data);
+
+//
         $formBean = new CreationUserFormBean();
-        $formBean->setPassword($password);
-        $formBean->setUsername($username);
-        $result = UserController::log_user($formBean);
-        var_dump($result);
+        $formBean->setPassword($data->user->password);
+        $formBean->setUsername($data->user->username);
+        $results = UserController::log_user($formBean);
+        if ($results->getResponse() === 'success') {
+          echo json_encode($results);
+        } else {
+          echo json_encode($results);
+        }
         break;
       default:
         var_dump('redirect');
@@ -51,3 +50,4 @@
     }
     
   }
+  

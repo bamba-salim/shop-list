@@ -20,7 +20,7 @@
     
     // get single user
     
-    public function get_user_by_sername(String $user)
+    public function get_user_by_username(String $user)
     {
       return self::DAO()->find_by_username($user);
     }
@@ -41,7 +41,7 @@
     {
       $formbean->setToken($this->generate_user_token());
       $formbean->setPassword($this->pass_crypt($formbean->getPassword()));
-      $formbean->setCreatedAt($this->date());
+      $formbean->setCreatedAt($this->_date());
       self::DAO()->create_new_user($formbean);
     }
     

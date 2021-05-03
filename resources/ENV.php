@@ -23,7 +23,7 @@
     
     public function get_env_json()
     {
-      $json = $_SERVER['HTTP_HOST'] === 'test-mvc.alkebulabz.com' ? './resources/ENV.json' : './resources/ENV_LOCAL.json';
+      $json = $_SERVER['HTTP_HOST'] === 'test-mvc.alkebulabz.com' ? 'resources/ENV.json' : 'resources/ENV_LOCAL.json';
       return json_decode(file_get_contents("./" . $json));
     }
     
