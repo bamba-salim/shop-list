@@ -16,7 +16,7 @@ loginModule.controller('loginController', ($scope, $http, loginService) => {
   
   
   $scope.logUser = (newUser = false) => {
-    
+    console.log('log');
     if (newUser) {
       loginService._addUser($scope.inputs).then(res => {
         if (res.data.response === 'success') {
