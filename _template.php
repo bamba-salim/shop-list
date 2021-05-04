@@ -1,11 +1,9 @@
 <?php require_once('./resources/config.php') ?>
 <?php
-  require_once('./resources/dao/UserDao.php');
-  $user = new UserDAO();
+  require_once('./resources/controllers/UserController.php');
   
-  $louis = $user->find_all();
-  var_dump($louis);
-  ?>
+  var_dump(UserController::fetch_all_users());
+?>
 <html ng-app="rootApp" lang="fr">
 <head>
   <?php include_once('./app/component/communs/header.php') ?>
