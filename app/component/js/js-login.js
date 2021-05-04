@@ -28,6 +28,7 @@ loginModule.controller('loginController', ($scope, $http, loginService) => {
       })
     } else {
       loginService._logUser($scope.inputs).then(res => {
+        console.log(res.data)
         if (res.data.response === 'success') {
           localStorage.setItem('u_t', res.data.data.token);
           window.location.href = './';
