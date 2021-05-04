@@ -1,5 +1,11 @@
 <?php require_once('./resources/config.php') ?>
-
+<?php
+  require_once('./resources/Dao.php');
+  $user = new UserDAO();
+  
+  $louis = $user->find_all();
+  var_dump($louis);
+  ?>
 <html ng-app="rootApp" lang="fr">
 <head>
   <?php include_once('./app/component/communs/header.php') ?>
