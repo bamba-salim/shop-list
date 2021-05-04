@@ -1,6 +1,6 @@
 <?php require_once('./resources/config.php') ?>
 <?php
-  require_once('./resources/Dao.php');
+  require_once('./resources/dao/UserDao.php');
   $user = new UserDAO();
   
   $louis = $user->find_all();
