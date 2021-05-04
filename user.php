@@ -8,6 +8,7 @@
   <script type="text/javascript" src="./app/component/js/js-user.js?vr=0"></script>
 
   <script>
+    _unlog_redirect();
     angular.module("rootApp", []);
     angular.module("rootApp").requires.push("userModule");
   </script>
