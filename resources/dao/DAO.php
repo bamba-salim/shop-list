@@ -14,7 +14,6 @@
     {
       $env = new ENV();
       try {
-        var_dump($env->get_dsn());
         self::$_db = new PDO($env->get_dsn(), $env->getDBUSER(), $env->getDBPASSWORD(),
             array(
                 PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8',
