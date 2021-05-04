@@ -3,50 +3,66 @@
 <html ng-app="rootApp" lang="fr">
 <head>
   <?php include_once('./app/component/communs/header.php') ?>
-  <!--  <script src="./app/assets/js/javascript_utils.js"></script>-->
-
-  <script type="text/javascript" src="./app/component/js/js-login.js?vr=3"></script>
-
+  <script type="text/javascript" src="./app/component/js/js-login.js?vr=6"></script>
   <script>
+    _log_redirect();
     angular.module("rootApp", []);
     angular.module("rootApp").requires.push("loginModule");
   </script>
 
   <title>Page de login | <?= SITE_NAME ?></title>
 </head>
-<body>
-<header>
-  <?php include('./app/component/communs/Navbar.php') ?>
-</header>
+<body class="bg-gradient-to-r from-gray-500 to-gray-400 flex items-center">
+<main ng-controller="loginController" class="mx-auto w-full">
 
-<main ng-controller="loginController">
-  {{ login }}
-  <div>
-    <div>
-      Inscription
-      <form action="proc?add=user" method="post">
-        <input type="text" name="username" placeholder="username">
-        <input type="password" name="password" placeholder="passwword">
-        <input type="submit" value="Inscription">
-      </form>
+  <div class="min-h-2/3 bg-gradient-to-r from-gray-200 to-gray-300 rounded-lg sm:max-w-prose md:w-1/3 mx-auto">
+    <div class="flex flex-row w-full">
+      <div class="w-1/2 rounded-tl-lg border text-center p-3 text-2xl cursor-pointer">Inscription</div>
+      <div class="w-1/2 rounded-tr-lg border text-center p-3 text-2xl cursor-default bg-blue-800 text-white">Connexion</div>
     </div>
-    <div>
-      Connexion
-      <form ng-submit="addUser()" class="">
-        <div>
-          <input type="text" name="username" placeholder="Nom d'utilisateur"
-                 class="py-1 px-3 rounded-full focus:outline-none" ng-model="inputs.username">
-          <input type="password" name="password" placeholder="Mot de passe"
-                 class="py-1 px-3 rounded-full focus:outline-none" ng-model="inputs.password">
-          <input type="submit" value="Connexion" class="bg-gray-100 py-1 px-3 rounded-full">
-        </div>
-      </form>
+    <div class="px-3 py-2">
+      <!-- Inscription -->
+      <div>
+        Inscription
+        <form name="newForm" ng-submit="logUser(true)">
+          <div class="my-2">
+            <label for="newUsername">Identifiant</label>
+            <input type="text" name="newUsername" id="newUsername" placeholder="newUsername" ng-model="inputs.newUsername" ng-class="form_input_class" required>
+          </div>
+          <div class="my-2">
+            <label for="newPassword">Mot de passe</label>
+            <input type="password" name="newPassword" id="newPassword" placeholder="newPassword" ng-model="inputs.newPassword" ng-class="form_input_class" required>
+          </div>
+          <input type="submit" value="Inscription" class="bg-green-600 text-white py-1 px-3 my-1 border w-full">
+        </form>
+      </div>
+      <!-- Connexion -->
+      <div class="">
+        Connexion
+        <form name="form" ng-submit="logUser()" class="">
+          <div>
+            <div class="my-2">
+              <label for="username">Identifiant</label>
+              <input type="text" name="username" id="username" placeholder="Identifiant"
+                     ng-class="form_input_class" ng-model="inputs.username" required>
+            </div>
+            <div class="my-2">
+              <label for="password">Mot de passe</label>
+              <input type="password" name="password" id="password" placeholder="Mot de passe"
+                     ng-class="form_input_class" ng-model="inputs.password" required>
+            </div>
+            <div class="my-2">
+              <input type="submit" value="Connexion" class="bg-blue-800 text-white  py-1 px-3 my-1 border w-full">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div ng-show="!_.isNull(log_error)">
+        <p class="text-red-500">{{ log_error }}</p>
+      </div>
     </div>
   </div>
 </main>
-<footer>
-
-</footer>
 </body>
 </html>
 

@@ -23,9 +23,11 @@
       if (empty($formBean->getUsername()) || empty($formBean->getPassword())) {
         $res->setMessage("veuillez renseignez tous les champs");
       } else {
-        $user = self::MODEL()->get_user_by_sername($formBean->getUsername());
+        $user = self::MODEL()->get_user_by_username($formBean->getUsername());
         if (count($user) === 0) {
           self::MODEL()->create_new_user($formBean);
+          $newUser = self::MODEL()->get_user_by_username($formBean->getUsername());
+          $res->setData($newUser[0]->token);
           $res->setResponse(self::SUCCESS);
         } else {
           $res->setMessage("Nom d'utilisateur indisponible ou connectez vous !");
@@ -55,7 +57,6 @@
         }
       }
       return $res;
-      
     }
     
     

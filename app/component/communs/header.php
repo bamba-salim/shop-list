@@ -4,14 +4,16 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <!-- STYLE -->
-<link rel="stylesheet" href="./app/assets/style/tailwind.css">
+<link rel="stylesheet" href="./app/assets/style/tailwind.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
 
 <!-- SCRIPT -->
 <script type="text/javascript" src="./app/assets/js/jquery.js"></script>
 <script type="text/javascript" src="./app/assets/js/lodash.js"></script>
 <script type="text/javascript" src="./app/assets/js/js-angular.js"></script>
-<script type="text/javascript" src="./app/component/js/main.js"></script>
+<script type="text/javascript" src="./app/component/js/_main.js"></script>
 <script type="text/javascript" src="./app/assets/js/javascript_utils.js"></script>
 
 

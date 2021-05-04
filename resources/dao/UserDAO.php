@@ -49,10 +49,9 @@
     
     public function create_new_user(CreationUserFormBean $formBean)
     {
-      var_dump($formBean);
       $this->query->setColonnes(["`username`", "`password`","`token`","`created_at`"]);
       $this->query->setValues([":username",":password",":token",":date"]);
-      $this->query->setData([
+      $this->query->setData ([
           ":username" => $formBean->getUsername(),
           ":password" => $formBean->getPassword(),
           ":token" => $formBean->getToken(),

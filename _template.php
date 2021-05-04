@@ -3,7 +3,6 @@
 <html ng-app="rootApp" lang="fr">
 <head>
   <?php include_once('./app/component/communs/header.php') ?>
-  <!--  <script src="./app/assets/js/javascript_utils.js"></script>-->
 
   <script type="text/javascript" src="./app/component/js/js-template.js?vr=0"></script>
 

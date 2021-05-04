@@ -9,10 +9,12 @@
   if (isset($_GET['add'])) {
     switch ($_GET['add']) {
       case 'user':
+        $data = json_decode(file_get_contents("php://input"));
         $formBean = new CreationUserFormBean();
-        $formBean->setPassword($password);
-        $formBean->setUsername($username);
+        $formBean->setPassword($data->user->newPassword);
+        $formBean->setUsername($data->user->newUsername);
         $results = UserController::add_new_user($formBean);
+        echo json_encode($results);
         break;
       case 'list':
         var_dump('list');
@@ -31,23 +33,25 @@
     switch ($_GET['log']) {
       case 'user':
         $data = json_decode(file_get_contents("php://input"));
-//        var_dump($data);
-
-//
         $formBean = new CreationUserFormBean();
         $formBean->setPassword($data->user->password);
         $formBean->setUsername($data->user->username);
         $results = UserController::log_user($formBean);
-        if ($results->getResponse() === 'success') {
-          echo json_encode($results);
-        } else {
-          echo json_encode($results);
-        }
+        echo json_encode($results);
         break;
       default:
         var_dump('redirect');
-      
     }
-    
+  }
+  
+  if(isset($_GET['fetch'])){
+    switch ($_GET['fetch']) {
+      case 'user':
+        $results = UserController::fetch_user_by_token($_GET['token']);
+        echo json_encode($results);
+        break;
+      default:
+        var_dump('redirect');
+    }
   }
   

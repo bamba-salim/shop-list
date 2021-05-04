@@ -6,9 +6,15 @@ navbarModule.service('navbarService', function () {
 
 navbarModule.controller('navbarController', ($scope, navbarService) => {
   $scope.navbar = 'la nav bar'
+  $scope.isLog = !_.isNull(localStorage.getItem('u_t'));
   
+  
+  $scope._onInit = () => {
+  
+  }
   $scope._logout = () => {
-    console.log('logout')
+    localStorage.removeItem('u_t');
+    window.location.href = './login';
   }
 })
 

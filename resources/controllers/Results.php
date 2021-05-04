@@ -53,7 +53,6 @@
     {
       $this->data = $data;
       $this->setNbResults($data);
-  
     }
     
     public function getNbResults()
@@ -63,7 +62,6 @@
     
     public function setNbResults($data): void
     {
-//      var_dump(gettype($data));
       switch (gettype($data)) {
         case "array":
           $this->nbResults = count($data);
@@ -76,7 +74,6 @@
           break;
         default:
           $this->nbResults = 0;
-        
       }
     }
     
