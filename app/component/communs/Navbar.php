@@ -6,7 +6,10 @@
       {{ navbar }}
     </div>
     <div ng-show="isLog">
-      <span class="" ng-click="_logout()" >
+      <a href="./user" class="cursor-pointer">
+        <span class="material-icons text-blue-600">person</span>
+      </a>
+      <span class="cursor-pointer" ng-click="_logout()">
         <span class="material-icons text-red-600">input</span>
       </span>
     </div>

@@ -15,13 +15,11 @@
 
   <title>Fiche user | <?= SITE_NAME ?></title>
 </head>
-<body>
-<header>
-  <?php include('./app/component/communs/Navbar.php') ?>
-</header>
+<body class="bg-gray-50">
+<?php include('./app/component/communs/Navbar.php') ?>
 
 <main ng-controller="userController" ng-init="_onInit()">
-  {{ testUnitaire }}
+  {{ user }}
 </main>
 <footer>
 

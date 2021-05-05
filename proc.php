@@ -47,7 +47,12 @@
   if(isset($_GET['fetch'])){
     switch ($_GET['fetch']) {
       case 'user':
+        if(!isset($_GET['token'])) header('location: ./');
         $results = UserController::fetch_user_by_token($_GET['token']);
+        echo json_encode($results);
+        break;
+      case 'users':
+        $results = UserController::fetch_all_users();
         echo json_encode($results);
         break;
       default:
