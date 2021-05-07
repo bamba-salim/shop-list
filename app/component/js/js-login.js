@@ -42,17 +42,21 @@ loginModule.controller('loginController', ($scope, loginService) => {
   
   $scope.logUser = (newUser = false) => {
     if (newUser) {
-      loginService._addUser($scope.inputs).then(res => {
-        if (res.data.response === 'success') {
-          localStorage.setItem('u_t', res.data.data.token);
-          window.location.href = './';
-        } else {
-          $scope.log_error = res.data.message;
-        }
-      })
+      if($scope.inputs.newPassword === $scope.inputs.password2){
+        loginService._addUser($scope.inputs).then(res => {
+          if (res.data.response === 'success') {
+            localStorage.setItem('u_t', res.data.data.token);
+            window.location.href = './';
+          } else {
+            $scope.log_error = res.data.message;
+          }
+        })
+      } else {
+        $scope.log_error = "Les mots de passe ne correspondent pas!"
+      }
+
     } else {
       loginService._logUser($scope.inputs).then(res => {
-        console.log(res.data)
         if (res.data.response === 'success') {
           localStorage.setItem('u_t', res.data.data.token);
           window.location.href = './';

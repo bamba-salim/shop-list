@@ -3,10 +3,9 @@
   require_once('./resources/dao/Request.php');
   
   
-  
   class UserDAO extends DAO
   {
-  
+    
     private static $table = "users as u";
     private $req_user;
     private $query;
@@ -26,21 +25,21 @@
       return self::get($this->req_user);
     }
     
-    public  function find_by_id(int $id)
+    public function find_by_id(int $id)
     {
       $this->req_user->setConditions("where u.id = :id");
       $this->req_user->setData(["id" => $id]);
       return self::get($this->req_user);
     }
     
-    public  function find_by_token(String $token)
+    public function find_by_token(string $token)
     {
       $this->req_user->setConditions("where u.token = :token");
       $this->req_user->setData(["token" => $token]);
       return self::get($this->req_user);
     }
     
-    public function find_by_username(String $username)
+    public function find_by_username(string $username)
     {
       $this->req_user->setConditions("where u.username = :usename");
       $this->req_user->setData(["usename" => $username]);
@@ -49,16 +48,26 @@
     
     public function create_new_user(CreationUserFormBean $formBean)
     {
-      $this->query->setColonnes(["`username`", "`password`","`token`","`created_at`"]);
-      $this->query->setValues([":username",":password",":token",":date"]);
-      $this->query->setData ([
+      $this->query->setColonnes(["`username`", "`password`", "`token`", "`created_at`"]);
+      $this->query->setValues([":username", ":password", ":token", ":date"]);
+      $this->query->setData([
           ":username" => $formBean->getUsername(),
           ":password" => $formBean->getPassword(),
           ":token" => $formBean->getToken(),
           ":date" => $formBean->getCreatedAt(),
-          ]);
+      ]);
       return $this->add($this->query);
-      
+    }
+    
+    public function switch_actived(int $idUSer, int $isActive)
+    {
+      $this->query->setConditions('where id = :id');
+      $this->query->setValues(["`active` = :active"]);
+      $this->query->setData([
+          ":id" => $idUSer,
+          ":active" => $isActive
+      ]);
+      $this->set($this->query);
     }
     
     ########## GETTERS & SETTERS ##########

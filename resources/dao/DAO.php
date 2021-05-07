@@ -53,10 +53,10 @@
     
     // Set
     
-    public static function set(Request $req)
+    public function set(Request $req)
     {
       $query = self::get_db()->prepare($req->update());
-      $query->execute;
+      $query->execute($req->getData());
     }
     
     // Del

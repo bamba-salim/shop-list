@@ -44,10 +44,10 @@
     }
   }
   
-  if(isset($_GET['fetch'])){
+  if (isset($_GET['fetch'])) {
     switch ($_GET['fetch']) {
       case 'user':
-        if(!isset($_GET['token'])) header('location: ./');
+        if (!isset($_GET['token'])) header('location: ./');
         $results = UserController::fetch_user_by_token($_GET['token']);
         echo json_encode($results);
         break;
@@ -60,3 +60,15 @@
     }
   }
   
+  if (isset($_GET['set'])) {
+    switch ($_GET['set']) {
+      case 'user-active':
+        $data = json_decode(file_get_contents("php://input"));
+//        UserController::switch_actived($data->id);
+        $results = UserController::switch_actived($data->id);
+        echo json_encode($results);
+        break;
+      default:
+        var_dump('redirect');
+    }
+  }

@@ -6,6 +6,10 @@ usersModule.service('usersService', function ($http) {
   this._fetchAllUsers = () => {
     return $http.get('./proc?fetch=users')
   }
+  
+  this._switchActiveUser = (idUser) => {
+    return $http.post('./proc?set=user-active', {'id': idUser})
+  }
 })
 
 usersModule.controller('usersController', ($scope, usersService, $uibModal) => {
@@ -26,7 +30,11 @@ usersModule.controller('usersController', ($scope, usersService, $uibModal) => {
   }
   
   $scope.onToggleActiveClick = (idUser) => {
-    console.log(idUser)
+    usersService._switchActiveUser(idUser)
+    fetchAllUsers();
+  }
+  $scope.format_date = (date) => {
+    return dayjs(date).format('MMM DD, YYYY');
   }
   
   

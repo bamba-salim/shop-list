@@ -92,5 +92,13 @@
       return $res;
     }
     
+    public static function switch_actived(int $idUser)
+    {
+      $res = self::_results();
+      self::MODEL()->switch_actived($idUser);
+      $res->setResponse(self::SUCCESS);
+      return $res;
+    }
+    
     
   }
