@@ -15,8 +15,6 @@ usersModule.service('usersService', function ($http) {
 usersModule.controller('usersController', ($scope, usersService, $uibModal) => {
   $scope.users = []
   
-  $scope.testUnitaire = "users page";
-  
   $scope._onInit = () => {
     fetchAllUsers()
   }
@@ -30,7 +28,8 @@ usersModule.controller('usersController', ($scope, usersService, $uibModal) => {
   }
   
   $scope.onToggleActiveClick = (idUser) => {
-    usersService._switchActiveUser(idUser)
+    console.log(idUser);
+    usersService._switchActiveUser(idUser);
     fetchAllUsers();
   }
   $scope.format_date = (date) => {

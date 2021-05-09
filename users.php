@@ -4,7 +4,7 @@
 <head>
   <?php include_once('./app/component/communs/header.php') ?>
 
-  <script type="text/javascript" src="./app/component/js/js-users.js?vr=5"></script>
+  <script type="text/javascript" src="./app/component/js/js-users.js?vr=6"></script>
 
   <script>
     angular.module("rootApp", []);
