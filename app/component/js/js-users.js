@@ -29,8 +29,11 @@ usersModule.controller('usersController', ($scope, usersService, $uibModal) => {
   
   $scope.onToggleActiveClick = (idUser) => {
     console.log(idUser);
-    usersService._switchActiveUser(idUser);
-    fetchAllUsers();
+    usersService._switchActiveUser(idUser)
+      .then(res => {
+        console.log(res)
+        fetchAllUsers();
+      });
   }
   $scope.format_date = (date) => {
     return dayjs(date).format('MMM DD, YYYY');
