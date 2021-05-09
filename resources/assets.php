@@ -9,8 +9,11 @@
   
   class ICON
   {
+    
     public static function _ICON($_icon, $_class = ''): string
     {
+      var_dump($_icon);
+      var_dump($_class);
       return "<span class='material-icons $_class'>$_icon</span>";
     }
     
