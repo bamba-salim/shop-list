@@ -27,9 +27,8 @@ usersModule.controller('usersController', ($scope, usersService, $uibModal) => {
     console.log('view: ' + idUser)
   }
   
-  $scope.onToggleActiveClick = (idUser, active) => {
+  $scope.onToggleActiveClick = (idUser) => {
     console.log(idUser);
-    console.log(active);
     usersService._switchActiveUser(idUser)
       .then(res => {
         console.log(res)
