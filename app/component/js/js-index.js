@@ -7,6 +7,6 @@ shopModule.controller('shopController', ($scope) => {
   $scope._onInit = () => {
     console.log('shop')
   }
-  
 })
 
+angular.module("rootApp").requires.push("shopModule");

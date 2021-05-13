@@ -4,12 +4,10 @@
 <head>
   <?php include_once('./app/component/communs/header.php') ?>
 
-  <script type="text/javascript" src="./app/component/js/js-index.js?vr=0"></script>
+  <script type="text/javascript" src="./app/component/js/js-index.js?vr=1"></script>
 
   <script>
     _unlog_redirect()
-    angular.module("rootApp", []);
-    angular.module("rootApp").requires.push("shopModule");
   </script>
   <title>Page d'accueil | <?= SITE_NAME ?></title>
 </head>

@@ -68,3 +68,4 @@ loginModule.controller('loginController', ($scope, loginService) => {
   }
   
 })
+angular.module("rootApp").requires.push("loginModule");

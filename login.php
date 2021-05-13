@@ -3,11 +3,9 @@
 <html ng-app="rootApp" lang="fr">
 <head>
   <?php include_once('./app/component/communs/header.php') ?>
-  <script type="text/javascript" src="./app/component/js/js-login.js?vr=9"></script>
+  <script type="text/javascript" src="./app/component/js/js-login.js?vr=10"></script>
   <script>
     _log_redirect();
-    angular.module("rootApp", []);
-    angular.module("rootApp").requires.push("loginModule");
   </script>
 
   <title>Page de login | <?= SITE_NAME ?></title>

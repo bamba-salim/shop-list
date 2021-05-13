@@ -10,3 +10,4 @@ templateModule.controller('templateController', ($scope) => {
   
 })
 
+angular.module("rootApp").requires.push("templateModule");

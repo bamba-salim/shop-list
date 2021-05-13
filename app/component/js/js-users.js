@@ -3,68 +3,55 @@ let pair_class = "bg-gray-50";
 let impair_class = "bg-gray-100"
 
 usersModule.service('usersService', function ($http) {
-  this._fetchAllUsers = () => {
-    return $http.get('./proc?fetch=users')
-  }
-  
-  this._switchActiveUser = (idUser) => {
-    return $http.post('./proc?set=user-active', {'id': idUser})
-  }
+    this._fetchAllUsers = () => {
+        return $http.get('./proc?fetch=users')
+    }
+    
+    this._switchActiveUser = (idUser) => {
+        return $http.post('./proc?set=user-active', {'id': idUser})
+    }
 })
 
 usersModule.controller('usersController', ($scope, usersService, $uibModal) => {
-  $scope.users = []
-  
-  $scope._onInit = () => {
-    fetchAllUsers()
-  }
-  
-  $scope.onDeleteUserCLick = (idUser) => {
-    console.log('delete: ' + idUser)
-  }
-  
-  $scope.onOpenUserViewModalCLick = (idUser) => {
-    console.log('view: ' + idUser)
-  }
-  
-  $scope.onToggleActiveClick = (idUser) => {
-    console.log(idUser);
-    usersService._switchActiveUser(idUser)
-      .then(res => {
-        console.log(res)
-        fetchAllUsers();
-      });
-  }
-  $scope.format_date = (date) => {
-    return dayjs(date).format('MMM DD, YYYY');
-  }
-  
-  
-  function isOdd(num) {
-    return num % 2;
-  }
-  
-  function fetchAllUsers() {
-    usersService._fetchAllUsers()
-      .then(res => {
-        $scope.users = res.data.data
-        _.forEach($scope.users, (user, i) => {
-          if (user.active === "1") {
-            user.toggleBtn = "toggle_on"
-            user.toggleBtnClass = "text-green-600"
-          } else {
-            user.toggleBtn = "toggle_off"
-            user.toggleBtnClass = "text-red-600"
-          }
-          if (isOdd(i) === 0) {
-            $scope.users[i].class = pair_class;
-          } else {
-            $scope.users[i].class = impair_class;
-          }
-          
-        })
-      })
-  }
-  
+    $scope.users = []
+    
+    $scope._onInit = () => {
+        fetchAllUsers()
+    }
+    
+    $scope.onDeleteUserCLick = (idUser) => {
+        console.log('delete: ' + idUser)
+    }
+    
+    $scope.onOpenUserViewModalCLick = (idUser) => {
+        console.log('view: ' + idUser)
+    }
+    
+    $scope.onToggleActiveClick = (idUser) => {
+        usersService._switchActiveUser(idUser)
+            .then(fetchAllUsers());
+    }
+    $scope.format_date = (date) => {
+        return dayjs(date).format('MMM DD, YYYY');
+    }
+    
+    
+    function isOdd(num) {
+        return num % 2;
+    }
+    
+    function fetchAllUsers() {
+        usersService._fetchAllUsers()
+            .then(res => {
+                $scope.users = res.data.data
+                _.forEach($scope.users, (user, i) => {
+                    user.toggleBtn = user.active === '1' ? 'toggle_on' : 'toggle_off';
+                    user.toggleBtnClass = user.active === '1' ? 'text-green-600' : 'text-red-600';
+                    $scope.users[i].class = isOdd(i) === 0 ? pair_class : impair_class;
+                })
+            })
+    }
+    
 })
 
+angular.module("rootApp").requires.push("usersModule");

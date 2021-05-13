@@ -4,12 +4,7 @@
 <head>
   <?php include_once('./app/component/communs/header.php') ?>
 
-  <script type="text/javascript" src="./app/component/js/js-users.js?vr=6"></script>
-
-  <script>
-    angular.module("rootApp", []);
-    angular.module("rootApp").requires.push("usersModule");
-  </script>
+  <script type="text/javascript" src="./app/component/js/js-users.js?vr=7"></script>
 
   <title>Gestion utilisateurs | <?= SITE_NAME ?></title>
 </head>
@@ -22,7 +17,7 @@
       <h1 class="font-bold text-3xl	">Gestion utilisateurs</h1>
     </div>
   </div>
-  <div class="mx-auto sm:w-full md:w-10/12 shadow-lg bg-white m-5 py-5">
+  <div class="<?= CSS::BLOC ?>">
     <table class="table-auto w-full">
       <thead>
       <tr class="border-b-2 border-gray-500 p-3">

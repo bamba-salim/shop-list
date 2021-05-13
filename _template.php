@@ -2,20 +2,14 @@
 <?php
   require_once('./resources/controllers/UserController.php');
   
-  var_dump(UserController::fetch_all_users());
 ?>
 <html ng-app="rootApp" lang="fr">
 <head>
   <?php include_once('./app/component/communs/header.php') ?>
 
-  <script type="text/javascript" src="./app/component/js/js-template.js?vr=0"></script>
+  <script type="text/javascript" src="./app/component/js/js-template.js?vr=1"></script>
 
-  <script>
-    angular.module("rootApp", []);
-    angular.module("rootApp").requires.push("templateModule");
-  </script>
-
-  <title>Page d'accueil | <?= SITE_NAME ?></title>
+  <title>Page Template | <?= SITE_NAME ?></title>
 </head>
 <body>
 <header>
