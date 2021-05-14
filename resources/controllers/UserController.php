@@ -100,5 +100,11 @@
       return $res;
     }
     
-    
+    public static function delete_user(int $idUser)
+    {
+      $res = self::_results();
+      self::MODEL()->delete_user($idUser);
+      $res->setResponse(self::SUCCESS);
+      return $res;
+    }
   }

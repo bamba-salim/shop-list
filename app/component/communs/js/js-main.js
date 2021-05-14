@@ -9,3 +9,14 @@ function _unlog_redirect() {
     window.location.href = './login'
   }
 }
+
+var app = angular.module("rootApp", [])
+
+app.controller('main', ($scope)=>{
+  $scope.SITE_NAME = 'SHOP LIST';
+  $scope.CSS_CLASS = {
+    BTN : 'border shadow-sm font-medium py-3 px-5 my-1'
+  }
+  
+})
+

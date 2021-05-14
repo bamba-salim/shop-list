@@ -52,6 +52,11 @@
       self::DAO()->switch_actived($idUser, $active);
     }
     
+    public function delete_user(int $idUser)
+    {
+      self::DAO()->delete_user($idUser);
+    }
+    
     ########## GETTERS & SETTERS ##########
     
   }

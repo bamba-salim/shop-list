@@ -4,10 +4,10 @@ let inactive_log = 'cursor-pointer bg-gray-500 text-white';
 
 loginModule.service('loginService', function ($http) {
   this._logUser = (data) => {
-    return $http.post("./proc?log=user", {"user": data})
+    return $http.post("./_.proc?log=user", {"user": data})
   }
   this._addUser = (data) => {
-    return $http.post("./proc?add=user", {"user": data})
+    return $http.post("./_.proc?add=user", {"user": data})
   }
 })
 

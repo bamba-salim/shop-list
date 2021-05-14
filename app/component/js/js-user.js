@@ -3,15 +3,13 @@ var userModule = angular.module('userModule', [])
 userModule.service('userService', function ($http) {
     
     this.fetchUser = (user_token) => {
-        return $http.get('./proc?fetch=user&token=' + user_token)
+        return $http.get('./_.proc?fetch=user&token=' + user_token);
     }
     
 })
 
 userModule.controller('userController', ($scope, userService) => {
     $scope.user = {};
-    
-    $scope.testUnitaire = "user page";
     
     $scope._onInit = (userToken) => {
         fetch_user_by_token(userToken !== '' ? userToken : localStorage.getItem('u_t'))

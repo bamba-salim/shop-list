@@ -28,7 +28,7 @@
     
     public function delete()
     {
-      return "DELETE FROM {$this->getTable()}} WHERE {$this->getConditions()}";
+      return "DELETE FROM {$this->getTable()} WHERE {$this->getConditions()}";
     }
   
 

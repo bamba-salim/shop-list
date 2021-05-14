@@ -1,6 +1,4 @@
-<?php require_once('./resources/config.php') ?>
-
-<html ng-app="rootApp" lang="fr">
+<html lang="fr" ng-app="rootApp" ng-controller="main" >
 <head>
   <?php include_once('./app/component/communs/header.php') ?>
   <script type="text/javascript" src="./app/component/js/js-login.js?vr=10"></script>
@@ -8,7 +6,7 @@
     _log_redirect();
   </script>
 
-  <title>Page de login | <?= SITE_NAME ?></title>
+  <title>Page de login | {{ SITE_NAME }}</title>
 </head>
 <body class="bg-gradient-to-r from-gray-500 to-gray-400 flex items-center">
 <main ng-controller="loginController" class="mx-auto w-10/12  md:w-2/3 lg:w-1/4 h-1/2">

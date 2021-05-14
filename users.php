@@ -1,12 +1,10 @@
-<?php require_once('./resources/config.php') ?>
-
-<html ng-app="rootApp" lang="fr">
+<html lang="fr" ng-app="rootApp" ng-controller="main" >
 <head>
   <?php include_once('./app/component/communs/header.php') ?>
 
   <script type="text/javascript" src="./app/component/js/js-users.js?vr=7"></script>
 
-  <title>Gestion utilisateurs | <?= SITE_NAME ?></title>
+  <title>Gestion utilisateurs | {{SITE_NAME}} </title>
 </head>
 <body class="bg-gray-50">
 <?php include('./app/component/communs/Navbar.php') ?>
@@ -35,9 +33,9 @@
         <td class="text-left p-3">{{ user.status_name }}</td>
         <td class="text-left p-3">{{ format_date(user.created_at) }}</td>
         <td class="text-right p-3">
-          <a href="" ng-click="onOpenUserViewModalCLick(user.id)"><?= ICON::VIEW ?></a>
-          <a href="" ng-click="onDeleteUserCLick(user.id)"><?= ICON::DELETE ?></a>
-          <a href="" ng-click="onToggleActiveClick(user.id)"><?= ICON::_ICON('{{user.toggleBtn}}', '{{user.toggleBtnClass}}') ?></a>
+          <a href="" ng-click="viewUser(user.token)"><?= ICON::VIEW ?></a>
+          <a href="" ng-click="deleteUser(user)"><?= ICON::DELETE ?></a>
+          <a href="" ng-click="switchUserActive(user.id)"><?= ICON::_ICON('{{user.toggleBtn}}', '{{user.toggleBtnClass}}') ?></a>
         </td>
       </tr>
       </tbody>

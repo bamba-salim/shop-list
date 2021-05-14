@@ -52,7 +52,6 @@
     }
     
     // Set
-    
     public function set(Request $req)
     {
       $query = self::get_db()->prepare($req->update());
@@ -60,11 +59,10 @@
     }
     
     // Del
-    
     public function del(Request $req)
     {
       $query = self::get_db()->prepare($req->delete());
-      $query->execute;
+      $query->execute($req->getData());
     }
     
     ########## GETTERS & SETTERS ##########

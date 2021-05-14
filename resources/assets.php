@@ -4,8 +4,10 @@
   {
     const FORM_INPUT_CLASS = 'w-full py-1 px-3 my-1 border focus:outline-none';
     const FORM_INPUT_BTN = 'bg-green-600 text-white py-1 px-3 my-1 border w-full cursor-pointer';
+    const BTN_DANGER = 'bg-red-600 text-white py-1 px-3 my-1 border w-full cursor-pointer';
     const LOGIN_SWITCHED_BTN = 'w-1/2 text-center px-3 py-2 text-2xl';
     const BLOC = 'mx-auto sm:w-full md:w-10/12 shadow-lg bg-white m-8 p-8';
+    const BTN = 'border shadow-sm font-medium py-3 px-5 my-1';
   }
   
   class ICON

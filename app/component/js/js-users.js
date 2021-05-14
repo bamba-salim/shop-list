@@ -3,12 +3,19 @@ let pair_class = "bg-gray-50";
 let impair_class = "bg-gray-100"
 
 usersModule.service('usersService', function ($http) {
-    this._fetchAllUsers = () => {
-        return $http.get('./proc?fetch=users')
+    this._fetch_all_users = () => {
+        return $http.get('./_.proc?fetch=users')
+    }
+    this._fecth_user = () => {
+    
     }
     
-    this._switchActiveUser = (idUser) => {
-        return $http.post('./proc?set=user-active', {'id': idUser})
+    this._switch_active_user = (idUser) => {
+        return $http.post('./_.proc?set=user-active', {'id': idUser})
+    }
+    
+    this._delete_user = (id) => {
+        return $http.post('./_.proc?del=user-id', {'id': id})
     }
 })
 
@@ -19,16 +26,60 @@ usersModule.controller('usersController', ($scope, usersService, $uibModal) => {
         fetchAllUsers()
     }
     
-    $scope.onDeleteUserCLick = (idUser) => {
-        console.log('delete: ' + idUser)
+    $scope.deleteUser = (user) => {
+        console.log('delete: ' + user.id)
+        
+        $uibModal.open({
+            templateUrl: './app/component/modal/template-confirmation-modal.php',
+            appendTo: $("body"),
+            resolve: {
+                params: function () {
+                    return {"user": user};
+                }
+            },
+            controller: function ($uibModalInstance, $scope, params, usersService) {
+                let btn_bg = 'red-600'
+                let btn_hover_bg = 'red-700'
+                let text_color = 'white'
+                
+                _.assignIn($scope, {
+                    user: params.user,
+                    modal: {
+                        title: "Supprimer un utilisateur",
+                        text: 'Etes vous sur de vouloir supprimer définitivement l\'utilisateur "' + user.username + '" ?'
+                    },
+                    btn: {
+                        title: "Supprimer",
+                        class: 'bg-' + btn_bg + ' hover:bg-' + btn_hover_bg + ' text-' + text_color,
+                    }
+                })
+                
+                $scope.onEventButtonClick = () => {
+                    usersService._delete_user($scope.user.id)
+                    fetchAllUsers()
+                    $scope.dismiss()
+                }
+                
+                $scope.dismiss = function () {
+                    $uibModalInstance.dismiss('cancel');
+                };
+                
+                
+            }
+        }).result.then(function (result) {
+            console.log(result);
+        }, function (message) {
+            console.log("dismiss: " + message);
+        });
     }
     
-    $scope.onOpenUserViewModalCLick = (idUser) => {
-        console.log('view: ' + idUser)
+    $scope.viewUser = (token) => {
+        // todo: create modal
+        window.location.href = './user?token=' + token;
     }
     
-    $scope.onToggleActiveClick = (idUser) => {
-        usersService._switchActiveUser(idUser)
+    $scope.switchUserActive = (idUser) => {
+        usersService._switch_active_user(idUser)
             .then(fetchAllUsers());
     }
     $scope.format_date = (date) => {
@@ -41,7 +92,7 @@ usersModule.controller('usersController', ($scope, usersService, $uibModal) => {
     }
     
     function fetchAllUsers() {
-        usersService._fetchAllUsers()
+        usersService._fetch_all_users()
             .then(res => {
                 $scope.users = res.data.data
                 _.forEach($scope.users, (user, i) => {

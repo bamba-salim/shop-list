@@ -1,9 +1,4 @@
-<?php require_once('./resources/config.php') ?>
-<?php
-  require_once('./resources/controllers/UserController.php');
-  
-?>
-<html ng-app="rootApp" lang="fr">
+<html lang="fr" ng-app="rootApp" ng-controller="main">
 <head>
   <?php include_once('./app/component/communs/header.php') ?>
 

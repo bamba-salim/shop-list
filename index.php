@@ -1,6 +1,4 @@
-<?php require_once('./resources/config.php') ?>
-
-<html ng-app="rootApp" lang="fr">
+<html lang="fr" ng-app="rootApp" ng-controller="main">
 <head>
   <?php include_once('./app/component/communs/header.php') ?>
 
@@ -9,13 +7,13 @@
   <script>
     _unlog_redirect()
   </script>
-  <title>Page d'accueil | <?= SITE_NAME ?></title>
+  <title>Page d'accueil | {{ SITE_NAME }}</title>
 </head>
 <body>
 <?php include('./app/component/communs/Navbar.php') ?>
 
 <main ng-controller="shopController">
-
+{{ testUnitaire }} {{ SITE_NAME }}
 </main>
 <footer>
 

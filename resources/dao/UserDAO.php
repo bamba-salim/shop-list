@@ -61,13 +61,21 @@
     
     public function switch_actived(int $idUSer, int $isActive)
     {
-      $this->query->setConditions('where id = :id');
+      $this->query->setConditions('WHERE id = :id');
       $this->query->setValues(["`active` = :active"]);
       $this->query->setData([
           ":id" => $idUSer,
           ":active" => $isActive
       ]);
       $this->set($this->query);
+    }
+    
+    public function delete_user(int $idUser){
+      $this->query->setConditions('id = :id');
+      $this->query->setData([
+          ":id" => $idUser
+      ]);
+      $this->del($this->query);
     }
     
     ########## GETTERS & SETTERS ##########

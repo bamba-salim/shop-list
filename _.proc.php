@@ -2,8 +2,7 @@
   require_once('./resources/config.php');
   require_once('./resources/controllers/UserController.php');
   require_once('./resources/bean/CreationUserFormBean.php');
-
-//  header('Content-Type: application/json');
+  
   header("Content-type: application/json; charset=utf-8");
   
   if (isset($_GET['add'])) {
@@ -23,8 +22,7 @@
         var_dump('item');
         break;
       default:
-        var_dump('redirect');
-      
+        echo json_encode('echec');
     }
     
   }
@@ -40,7 +38,8 @@
         echo json_encode($results);
         break;
       default:
-        var_dump('redirect');
+        echo json_encode('echec');
+  
     }
   }
   
@@ -56,7 +55,7 @@
         echo json_encode($results);
         break;
       default:
-        var_dump('redirect');
+        echo json_encode('echec');
     }
   }
   
@@ -64,11 +63,23 @@
     switch ($_GET['set']) {
       case 'user-active':
         $data = json_decode(file_get_contents("php://input"));
-//        UserController::switch_actived($data->id);
         $results = UserController::switch_actived($data->id);
         echo json_encode($results);
         break;
       default:
-        var_dump('redirect');
+        echo json_encode('echec');
+    }
+  }
+  
+  if (isset($_GET['del'])) {
+    
+    switch ($_GET['del']) {
+      case 'user-id':
+        $data = json_decode(file_get_contents("php://input"));
+        $results = UserController::delete_user($data->id);
+        echo json_encode($results);
+        break;
+      default:
+        echo json_encode('echec');
     }
   }
