@@ -22,5 +22,5 @@
 <script type="text/javascript" src="./app/assets/js/ui-bootstrap-tpls-2.5.0.js"></script>
 
 
-<script type="text/javascript" src="./app/component/communs/js/js-main.js?v=1"></script>
+<script type="text/javascript" src="./app/component/communs/js/js-main.js?v=2 "></script>
 

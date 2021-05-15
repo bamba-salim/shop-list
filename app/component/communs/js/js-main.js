@@ -18,5 +18,9 @@ app.controller('main', ($scope)=>{
     BTN : 'border shadow-sm font-medium py-3 px-5 my-1'
   }
   
+  $scope.format_date = (date) => {
+    return dayjs(date).format('MMM DD, YYYY');
+  }
+  
 })
 

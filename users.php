@@ -1,4 +1,4 @@
-<html lang="fr" ng-app="rootApp" ng-controller="main" >
+<html lang="fr" ng-app="rootApp" ng-controller="main">
 <head>
   <?php include_once('./app/component/communs/header.php') ?>
 
@@ -33,8 +33,8 @@
         <td class="text-left p-3">{{ user.status_name }}</td>
         <td class="text-left p-3">{{ format_date(user.created_at) }}</td>
         <td class="text-right p-3">
-          <a href="" ng-click="viewUser(user.token)"><?= ICON::VIEW ?></a>
-          <a href="" ng-click="deleteUser(user)"><?= ICON::DELETE ?></a>
+          <a href="" ng-click="viewUserModal(user)"><?= ICON::VIEW ?></a>
+          <a href="" ng-click="deleteUserModal(user)"><?= ICON::DELETE ?></a>
           <a href="" ng-click="switchUserActive(user.id)"><?= ICON::_ICON('{{user.toggleBtn}}', '{{user.toggleBtnClass}}') ?></a>
         </td>
       </tr>
