@@ -3,7 +3,7 @@ var userModule = angular.module('userModule', [])
 userModule.service('userService', function ($http) {
     
     this.fetchUser = (user_token) => {
-        return $http.get('./_.proc?fetch=user&token=' + user_token);
+        return $http.get('./_api?fetch=user&token=' + user_token);
     }
     
 })

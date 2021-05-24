@@ -4,18 +4,18 @@ let impair_class = "bg-gray-100"
 
 usersModule.service('usersService', function ($http) {
     this._fetch_all_users = () => {
-        return $http.get('./_.proc?fetch=users')
+        return $http.get('./_api?fetch=users')
     }
     this._fecth_user = () => {
     
     }
     
     this._switch_active_user = (idUser) => {
-        return $http.post('./_.proc?set=user-active', {'id': idUser})
+        return $http.post('./_api?set=user-active', {'id': idUser})
     }
     
     this._delete_user = (id) => {
-        return $http.post('./_.proc?del=user-id', {'id': id})
+        return $http.post('./_api?del=user-id', {'id': id})
     }
 })
 
@@ -26,7 +26,6 @@ usersModule.controller('usersController', ($scope, usersService, $uibModal) => {
         fetchAllUsers()
     }
     
-
     
     $scope.viewUser = (token) => {
         // todo: create modal
@@ -70,7 +69,7 @@ usersModule.controller('usersController', ($scope, usersService, $uibModal) => {
                 let btn_bg = 'red-600'
                 let btn_hover_bg = 'red-700'
                 let text_color = 'white'
-            
+                
                 _.assignIn($scope, {
                     user: params.user,
                     modal: {
@@ -82,12 +81,12 @@ usersModule.controller('usersController', ($scope, usersService, $uibModal) => {
                         class: 'bg-' + btn_bg + ' hover:bg-' + btn_hover_bg + ' text-' + text_color,
                     }
                 })
-            
+                
                 $scope.onEventButtonClick = () => {
                     usersService._delete_user($scope.user.id)
                     $scope.dismiss()
                 }
-            
+                
                 $scope.dismiss = function () {
                     $uibModalInstance.dismiss('cancel');
                 };

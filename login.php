@@ -27,18 +27,15 @@
         <form name="newForm" ng-submit="logUser(true)">
           <div class="my-2">
             <label for="newUsername">Identifiant</label>
-            <input type="text" name="newUsername" id="newUsername" placeholder="Identifiant"
-                   ng-model="inputs.newUsername" class="<?= CSS::FORM_INPUT_CLASS ?>" required/>
+            <input type="text" name="newUsername" id="newUsername" placeholder="Identifiant" ng-model="inputs.newUsername" class="<?= CSS::FORM_INPUT_CLASS ?>" required/>
           </div>
           <div class="my-2">
             <label for="newPassword">Mot de passe</label>
-            <input type="password" name="newPassword" id="newPassword" placeholder="Mot de passe"
-                   ng-model="inputs.newPassword" class="<?= CSS::FORM_INPUT_CLASS ?>" required/>
+            <input type="password" name="newPassword" id="newPassword" placeholder="Mot de passe" ng-model="inputs.newPassword" class="<?= CSS::FORM_INPUT_CLASS ?>" required/>
           </div>
           <div class="my-2">
             <label for="password2">Confirmation mot de passe</label>
-            <input type="password" name="password2" id="password2" placeholder="Confirmation mot de passe"
-                   ng-model="inputs.password2" class="<?= CSS::FORM_INPUT_CLASS ?>" required/>
+            <input type="password" name="password2" id="password2" placeholder="Confirmation mot de passe" ng-model="inputs.password2" class="<?= CSS::FORM_INPUT_CLASS ?>" required/>
           </div>
           <div class="my-2">
             <input type="submit" value="Inscription" class="<?= CSS::FORM_INPUT_BTN ?>"/>
@@ -50,13 +47,11 @@
         <form name="form" ng-submit="logUser()">
           <div class="my-2">
             <label for="username">Identifiant</label>
-            <input type="text" name="username" id="username" placeholder="Identifiant"
-                   ng-model="inputs.username" class="<?= CSS::FORM_INPUT_CLASS ?>" required>
+            <input type="text" name="username" id="username" placeholder="Identifiant" ng-model="inputs.username" class="<?= CSS::FORM_INPUT_CLASS ?>" required>
           </div>
           <div class="my-2">
             <label for="password">Mot de passe</label>
-            <input type="password" name="password" id="password" placeholder="Mot de passe"
-                   ng-model="inputs.password" class="<?= CSS::FORM_INPUT_CLASS ?>" required>
+            <input type="password" name="password" id="password" placeholder="Mot de passe" ng-model="inputs.password" class="<?= CSS::FORM_INPUT_CLASS ?>" required>
           </div>
           <div class="my-2">
             <input type="submit" value="Connexion" class="<?= CSS::FORM_INPUT_BTN ?>">
