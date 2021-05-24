@@ -7,11 +7,11 @@
   
   if (isset($_GET['add'])) {
     switch ($_GET['add']) {
-      case 'user':
+      case 'user': // ok
         $data = json_decode(file_get_contents("php://input"));
         $formBean = new CreationUserFormBean();
-        $formBean->setPassword($data->user->newPassword);
-        $formBean->setUsername($data->user->newUsername);
+        $formBean->setPassword($data->user->password);
+        $formBean->setUsername($data->user->username);
         $results = UserController::add_new_user($formBean);
         echo json_encode($results);
         break;
@@ -29,7 +29,7 @@
   
   if (isset($_GET['log'])) {
     switch ($_GET['log']) {
-      case 'user':
+      case 'user': // ok
         $data = json_decode(file_get_contents("php://input"));
         $formBean = new CreationUserFormBean();
         $formBean->setPassword($data->user->password);
