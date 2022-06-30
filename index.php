@@ -1,22 +1,19 @@
-<html lang="fr" ng-app="rootApp" ng-controller="main">
+<!doctype html>
+<html lang="fr" ng-app="rootApp">
 <head>
-  <?php include_once('./app/component/communs/header.php') ?>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SHOP-LIST</title>
 
-  <script type="text/javascript" src="./app/component/js/js-index.js?vr=1"></script>
-
-  <script>
-    _unlog_redirect()
-  </script>
-  <title>Page d'accueil | {{ SITE_NAME }}</title>
+    <?php include './app/head-inc.php' ?>
 </head>
-<body>
-<?php include('./app/component/communs/Navbar.php') ?>
+<body ng-controller="appController" ng-init="_appInit()">
+<header ng-include="'./app/views/home/header-inc.php'"></header>
 
-<main ng-controller="shopController">
-{{ testUnitaire }} {{ SITE_NAME }}
+<main class="container">
+    <ui-view></ui-view>
 </main>
-<footer>
 
-</footer>
 </body>
 </html>
