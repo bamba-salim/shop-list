@@ -2,7 +2,7 @@
 
 require_once 'Commons.php';
 
-const FIREBASE_URL = "https://shop-list-89803-default-rtdb.europe-west1.firebasedatabase.app";
+const FIREBASE_URL = "";
 
 abstract class Firebase extends Commons
 {
