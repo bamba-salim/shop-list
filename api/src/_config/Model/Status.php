@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Commons.php';
+require_once './src/_config/Commons.php';
 
 class Status extends Commons
 {

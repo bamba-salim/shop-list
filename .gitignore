@@ -1,2 +1,4 @@
 /api/exemple/
 /.idea/
+/api/.env
+/api/.env.local

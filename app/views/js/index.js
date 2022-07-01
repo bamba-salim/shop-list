@@ -45,7 +45,6 @@ app.controller("appController", function ($scope, $location) {
     $scope.APP_NAME = Config.name
 
     $scope._appInit = () => {
-        console.log("app controller")
         $scope.isConnected = Auth.IsLoggedIn
         $scope.sessionUser = Auth.User
     }

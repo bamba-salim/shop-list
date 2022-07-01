@@ -11,16 +11,30 @@ class Router extends Manager
     public static $bodyData;
     public static $route;
 
-    public function __construct($response)
+    public function __construct($results)
     {
         self::$route = self::route();
-        self::$response = $response;
+        self::$results = $results;
         self::$params = self::$route[1] ?? null;
         self::$bodyData = self::inputs();
         self::$parameters = json_decode(json_encode(["params" => self::$params, "data" => self::$bodyData]));
     }
 
-    static function REQ($route, $ActionMethod)
+    static function INIT_ROUTE(){
+        $_SESSION['ROUTE_LIST'] = [];
+        self::includesRouterFiles();
+    }
+
+    static function ROUTES($routesList){
+        array_push($_SESSION['ROUTE_LIST'], ...$routesList);
+    }
+
+    function REQ($method, $name, $class, $function)
+    {
+        call_user_func_array([$this, $method], [$name, [$class, $function]]);
+    }
+
+    static function QUERY($route, $ActionMethod)
     {
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
@@ -64,21 +78,17 @@ class Router extends Manager
         echo json_encode($data);
     }
 
-    public static function RESPONSE()
+    public static function RESULTS()
     {
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
         header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, session_user");
 
-        echo self::setResponse();
+        echo self::setResults();
     }
 
+    public static function includesRouterFiles(){
+        foreach (scandir('./src/Router') as $router) if (!str_starts_with($router, ".")) include_once "./src/Router/$router";
 
-
-    protected static function do($method, $params)
-    {
-        $finalMethod = "$method[0]::$method[1]";
-        call_user_func($finalMethod, $params);
     }
-
 }

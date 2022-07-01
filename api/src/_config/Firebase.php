@@ -2,7 +2,6 @@
 
 require_once 'Commons.php';
 
-const FIREBASE_URL = "https://shop-list-89803-default-rtdb.europe-west1.firebasedatabase.app";
 
 abstract class Firebase extends Commons
 {
@@ -28,7 +27,7 @@ abstract class Firebase extends Commons
 
     public static function insert($table, $data)
     {
-        $path = FIREBASE_URL . "/$table.json";
+        $path = self::FIREBASE_URL() . "/$table.json";
         $grab = self::grab($path, "POST", json_encode($data));
         return $grab;
     }
@@ -38,7 +37,7 @@ abstract class Firebase extends Commons
 
         $table = self::getTableName($object);
 
-        $path = FIREBASE_URL . "/$table/$object->id.json";
+        $path = self::FIREBASE_URL() . "/$table/$object->id.json";
         $id = $object->id;
         unset($object->id);
         $grab = self::grab($path, "PATCH", json_encode($object));
@@ -48,10 +47,11 @@ abstract class Firebase extends Commons
     public static function delete($dto, $id)
     {
         $table = self::getTableName($dto);
-        $path = FIREBASE_URL . "/$table/$id.json";
+        $path = self::FIREBASE_URL() . "/$table/$id.json";
         $grab = self::grab($path, "DELETE");
         return $grab;
     }
+
     public static function fetch($dbPath, $queryKey = null, $queryType = null, $queryVal = null)
     {
         if (isset($queryType) && isset($queryKey) && isset($queryVal)) {
@@ -63,7 +63,7 @@ abstract class Firebase extends Commons
             }
         }
         $pars = isset($pars) ? "?$pars" : "";
-        $path = FIREBASE_URL . "/$dbPath.json$pars";
+        $path = self::FIREBASE_URL() . "/$dbPath.json$pars";
 
         $grab = self::grab($path, "GET");
         return $grab;
@@ -74,7 +74,7 @@ abstract class Firebase extends Commons
 
         $queryVal = urlencode($queryVal);
         $pars = "?orderBy=\"$queryKey\"&equalTo=$queryVal";
-        $path = FIREBASE_URL . "/$dbPath.json$pars";
+        $path = self::FIREBASE_URL() . "/$dbPath.json$pars";
         return self::grab($path, "GET");
     }
 

@@ -1,8 +1,14 @@
 <?php
+require_once 'DotEnv.php';
 
 
 abstract class Commons
 {
+
+    public static function FIREBASE_URL(){
+        return DotEnv::find("FIREBASE_URL");
+    }
+
     public static function inputs()
     {
         $data = json_decode(file_get_contents('php://input'));
@@ -37,4 +43,9 @@ abstract class Commons
         return strtolower(str_replace("DTO", "", $finalClass)) . 's';
     }
 
+    protected static function do($arrayethod, $params)
+    {
+        $finalMethod = "$arrayethod[0]::$arrayethod[1]";
+        call_user_func($finalMethod, $params);
+    }
 }

@@ -4,33 +4,35 @@ require_once 'Firebase.php';
 
 abstract class Manager extends Commons
 {
-    public static array $response;
-
-    protected static $results;
-    public static $arrayTest;
+    public static array $results;
 
     public static function fetchManagerFiles()
     {
-        foreach (scandir('./src/Action') as $manager) if (!str_starts_with($manager, ".")) require_once "./src/Action/$manager";
+        foreach (scandir('./src/Manager') as $manager) if (!str_starts_with($manager, ".")) require_once "./src/Manager/$manager";
     }
 
-    protected static function do($method, $params)
+    public static function test()
     {
-        $finalMethod = "$method[0]::$method[1]";
-        call_user_func($finalMethod, $params);
+        self::addJsonResults("url", "nonnon");
     }
 
-    protected static function addSuccesResults($action, $message){
-        self::$response["SUCCESS"] = ExceptionConfig::SUCCESS($action,$message);
+    public static function savon(){
+        self::addJsonResults("savon", "elle est bonne sa mère");
+    }
+
+    protected static function addSuccesResults($action, $message)
+    {
+        self::$results["SUCCESS"] = ExceptionConfig::SUCCESS($action, $message);
     }
 
     protected static function addJsonResults($item, $data)
     {
-        self::$response[$item] = $data;
+        self::$results[$item] = $data;
     }
 
-    protected static function setResponse()
+    protected static function setResults()
     {
-        return json_encode(self::ArrayToObject(self::$response));
+        return json_encode(self::ArrayToObject(self::$results));
     }
+
 }

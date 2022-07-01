@@ -23,7 +23,7 @@
                             <button type="submit" class="btn btn-info"><span class="text-white">Se connecter</span></button>
                         </div>
                         <div class="col w-100 d-flex justify-content-end">
-                            <p class="small fst-italic">(Vous n'avez pas de compte ? <button type="button" class="p-0 border-0 bg-transparent text-decoration-underline text-info fst-italic" style="{cursor: pointer}" ng-click="switchLogin()">Inscrivez-vous</button>.)</p>
+                            <p class="small fst-italic">(Vous n'avez pas de compte ? <span class="text-decoration-underline text-info fst-italic" style="cursor: pointer" ng-click="switchLogin()">Inscrivez-vous</span>.)</p>
                         </div>
                     </div>
                 </form>
@@ -44,7 +44,10 @@
                         </div>
                         <div class="col">
                             <label for="username" class="form-label">Nom d'utilisateur *</label>
-                            <input type="text" name="username" id="username" class="form-control" ng-model="inputs.username" placeholder="Nom d'utilisateur" required="required" >
+                            <input type="text" name="username" id="username" class="form-control" minlength="4" ng-model="inputs.username" placeholder="Nom d'utilisateur" required="required" ng-change="checkValidUsername(inputs.username)" >
+                            <smal ng-if="inputs.username.length > 4" class="fst-italic small"  ng-class="{'isValid': validUsername, 'isError': !validUsername }">
+                                <i class="fa-solid me-2" ng-class="{'fa-user-check': validUsername, 'fa-user-xmark ': !validUsername }"></i> {{ validUsernameMessage }} <span ng-if="!validUsername" class="text-decoration-underline" style="{cursor: pointer}" ng-click="switchLogin()">Connectez-vous</span>
+                            </smal>
                         </div>
                         <div class="col">
                             <label for="password" class="form-label">Mot de passe *</label>
@@ -55,7 +58,7 @@
                         </div>
                         <div class="col w-100 d-flex justify-content-end">
                             <p class="small fst-italic">
-                                (Vous avez un compte ? <button type="button" class="p-0 border-0 bg-transparent text-decoration-underline text-info fst-italic" style="{cursor: pointer}" ng-click="switchLogin()">Connectez-vous</button>.)
+                                (Vous avez un compte ? <span class="text-decoration-underline text-info fst-italic" style="cursor: pointer" ng-click="switchLogin()">Connectez-vous</span>.)
                             </p>
                         </div>
                     </div>

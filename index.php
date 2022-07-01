@@ -6,6 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SHOP-LIST</title>
 
+    <style>
+        .isError, .isError .form-label {
+            color: darkred;
+        }
+        .isValid, .isValid .form-label {
+            color: darkgreen;
+        }
+    </style>
+
     <?php include './app/head-inc.php' ?>
 </head>
 <body ng-controller="appController" ng-init="_appInit()">

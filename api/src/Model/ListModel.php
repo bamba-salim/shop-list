@@ -61,6 +61,13 @@ class ListModel extends Firebase
     public static function setListInfos(array $itemList)
     {
 
+        // prix total
+
+        // total item différent
+
+        // total item
+
+
         return "en cours";
     }
 

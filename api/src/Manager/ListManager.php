@@ -3,7 +3,7 @@
 require_once './src/Model/ListModel.php';
 
 
-class ListAction extends Manager
+class ListManager extends Manager
 {
 
     public static function deleteLists($inputs)
@@ -12,7 +12,7 @@ class ListAction extends Manager
         self::addSuccesResults("DELETE", sizeof($inputs->idsList) ." listes ont bien été supprimées !");
     }
 
-    public static function delteItemList($inputs)
+    public static function deleteItemList($inputs)
     {
         ListModel::deleteItemsDB($inputs->idsItem);
         self::addSuccesResults("DELETE", sizeof($inputs->idsItem) . " items ont bien été supprimés !");
@@ -27,7 +27,7 @@ class ListAction extends Manager
     {
         $itemList = ListModel::getItemsByList($listID);
         self::addJsonResults("list", ListModel::getListById($listID));
-        self::addSuccesResults("listInfos", ListModel::setListInfos($itemList));
+        self::addJsonResults("listInfos", ListModel::setListInfos($itemList));
         self::addJsonResults("itemsList", $itemList);
     }
 

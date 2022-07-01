@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Manager.php';
-require_once 'Status.php';
+require_once './src/_config/Model/Status.php';
 
 abstract class ExceptionConfig extends Manager
 {

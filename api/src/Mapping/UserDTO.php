@@ -42,9 +42,9 @@ class UserDTO extends DTO
     {
         $userDTO = new UserDTO();
         $userDTO->setId($inputs->id ?? uniqid());
-        $userDTO->setUsername($inputs->username ?? null);
-        $userDTO->setFirstname($inputs->firstname ?? null);
-        $userDTO->setLastname($inputs->lastname ?? null);
+        $userDTO->setUsername($inputs->username);
+        $userDTO->setFirstname($inputs->firstname ?? "");
+        $userDTO->setLastname($inputs->lastname ?? "");
         $userDTO->setIsAdmin($inputs->isAdmin ?? false);
         $userDTO->setPassword(password_hash($inputs->password, PASSWORD_BCRYPT));
         return $userDTO;
