@@ -32,11 +32,23 @@ loginAppModule.controller("loginAppController", function ($scope, loginAppServic
     $scope.switchLogin = () => $scope.isSignIn = !$scope.isSignIn;
 
     $scope.signinSubmit = () => {
-        loginAppService.signIn($scope.inputs).then(res => Auth.setUserSession(res.data.user))
+        loginAppService.signIn($scope.inputs).then(res => {
+            if (res.data.user ){
+                Auth.setUserSession(res.data.user)
+            } else {
+                console.log(res)
+            }
+        })
     }
 
     $scope.signupSubmit = () => {
-        loginAppService.signUp($scope.inputs).then(res => Auth.setUserSession(res.data.user))
+        loginAppService.signUp($scope.inputs).then(res => {
+            if (res.data.user ){
+                Auth.setUserSession(res.data.user)
+            } else {
+                console.log(res)
+            }
+        })
     }
 
     $scope.checkValidUsername = username => {

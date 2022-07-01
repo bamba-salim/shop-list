@@ -6,6 +6,9 @@ require_once 'Commons.php';
 abstract class Firebase extends Commons
 {
 
+    const EQUAL = "EQUAL";
+    const LIKE = "LIKE";
+
     public static function grab($url, $method, $par = null)
     {
         $ch = curl_init();

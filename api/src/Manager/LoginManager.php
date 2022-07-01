@@ -11,8 +11,7 @@ class LoginManager extends Manager
 
     public static function signInUser($formBean)
     {
-        $user = UserModel::loginUSER($formBean->loginFormBean);
-        self::addJsonResults("user", UserModel::getUserByID($user->getId()));
+        self::addJsonResults("user", UserModel::loginUSER($formBean->loginFormBean));
     }
 
     public static function isNewUsernameValid($username)

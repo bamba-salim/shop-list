@@ -6,7 +6,7 @@ Router::ROUTES([
     new Route("fetch-user-list", "GET", [ListManager::class, "fetchListsByUser"]),
 
     ##### EDIT
-    new Route("save-new-list", "GET", [ListManager::class, "saveNewList"]),
+    new Route("save-new-list", "POST", [ListManager::class, "saveNewList"]),
     new Route("save-new-item-list", "POST", [ListManager::class, "saveNewItemList"]),
 
     ##### DELETE

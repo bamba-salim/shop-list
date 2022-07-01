@@ -13,7 +13,6 @@ class UserDTO extends DTO
 
     public static function build($id, $userDB)
     {
-
         $userDTO = new UserDTO();
         $userDTO->setId($id);
         $userDTO->setUserName($userDB->username);
@@ -24,17 +23,15 @@ class UserDTO extends DTO
         return $userDTO;
     }
 
-    public static function buildFull($fromDB){
-        $userDB = array_values($fromDB);
-        $id = array_keys($fromDB);
+    public static function buildFull($id, $userDB){
 
         $userDTO = new UserDTO();
-        $userDTO->setId($id[0]);
-        $userDTO->setUserName($userDB[0]->username);
-        $userDTO->setLastname($userDB[0]->lastname);
-        $userDTO->setFirstname($userDB[0]->firstname);
-        $userDTO->setIsAdmin($userDB[0]->isAdmin);
-        $userDTO->setPassword($userDB[0]->password);
+        $userDTO->setId($id);
+        $userDTO->setUserName($userDB->username);
+        $userDTO->setLastname($userDB->lastname);
+        $userDTO->setFirstname($userDB->firstname);
+        $userDTO->setIsAdmin($userDB->isAdmin);
+        $userDTO->setPassword($userDB->password);
         return $userDTO;
     }
 
