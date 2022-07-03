@@ -41,7 +41,7 @@ class DotEnv
         }
     }
 
-    static public function find($item)
+    static public function find($item): string | int
     {
         self::load();
         return getEnv($item);

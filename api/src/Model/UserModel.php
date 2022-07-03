@@ -1,17 +1,17 @@
 <?php
 
-require_once "./src/_config/Firebase.php";
+require_once "./src/_config/Database/DAO.php";
 
 require_once "./src/Mapping/UserDTO.php";
 
 
-class UserModel extends Firebase
+class UserModel extends DAO
 {
 
     public static function editUser($formBean)
     {
         $user = UserDTO::buildToSave($formBean);
-        return self::saveOrUpdate($user);
+        return self::Firebase()::saveOrUpdate($user);
     }
 
     public static function getUserByID($userID){
@@ -20,7 +20,7 @@ class UserModel extends Firebase
 
     public static function getUserByUsername($username)
     {
-        $user = (array) json_decode(self::fetch("users", "username", self::EQUAL, $username));
+        $user = (array) json_decode(self::Firebase()::get("users", "username", self::EQUAL, $username));
         return !empty($user) ? UserDTO::buildFull(array_keys($user)[0],array_values($user)[0]) : null ;
     }
 
@@ -35,7 +35,7 @@ class UserModel extends Firebase
 
     public static function getUserByUsernameCheck($username)
     {
-        return sizeof(self::findWhereEqual(UserDTO::class,"username", $username)) === 0;
+        return sizeof(self::Firebase()::findWithFilter(UserDTO::class,"username", $username)) === 0;
 
     }
 }

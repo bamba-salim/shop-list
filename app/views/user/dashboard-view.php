@@ -61,7 +61,7 @@
         <div class="col order-1 order-lg-2" ng-class="{'w-100': userLists.length === 0 }">
             <div class="{{ cssClass.bloc }}">
                 <div class="d-flex align-items-center py-2">
-                    <h4 class="d-block m-0">Ajouter un item</h4>
+                    <h4 class="d-block m-0">Ajouter une liste</h4>
                 </div>
                 <hr>
 

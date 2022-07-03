@@ -9,6 +9,7 @@ class ListDTO extends DTO
     public $description;
     public $user;
 
+
     public static function build($id, $listDB)
     {
         $list = new ListDTO();
@@ -28,6 +29,36 @@ class ListDTO extends DTO
         $listDTO->setDescription($inputs->description ?? null);
         $listDTO->setUser($inputs->user ?? null);
         return $listDTO;
+    }
+
+    public static function BuildListInfos($itemList)
+    {
+        $final = [];
+
+        /* @var $item ItemDTO */
+        $totalItem = 0;
+        $totalPrice = 0;
+
+        /* @var $item ItemDTO */
+        foreach ($itemList as $item) {
+            $totalItem += $item->getQuantity();
+            $totalPrice += $item->getQuantity() * $item->getPrice();
+        }
+
+        $final['unique_item'] = sizeof($itemList);
+        $final['total_price'] = $totalPrice;
+        $final['total_item'] = $totalItem;
+        $final['price_per_item'] = $totalItem != 0 ? $totalPrice / $totalItem : 0;
+
+        $final['min_price'] = array_reduce($itemList, function ($itemA, $itemB) {
+            return $itemA->id < $itemB->price ? $itemA : $itemB;
+        }, array_shift($itemList));
+
+        $final['max_price'] = array_reduce($itemList, function ($itemA, $itemB) {
+            return $itemA->id > $itemB->price ? $itemA : $itemB;
+        }, array_shift($itemList));
+
+        return $final;
     }
 
     /**

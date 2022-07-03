@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Firebase.php';
+require_once 'Commons.php';
 
 abstract class Manager extends Commons
 {
@@ -9,11 +9,6 @@ abstract class Manager extends Commons
     public static function fetchManagerFiles()
     {
         foreach (scandir('./src/Manager') as $manager) if (!str_starts_with($manager, ".")) require_once "./src/Manager/$manager";
-    }
-
-    public static function test()
-    {
-        self::addJsonResults("url", "nonnon");
     }
 
     public static function savon(){

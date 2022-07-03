@@ -53,7 +53,7 @@ listModule.controller("listController", function ($scope, $state, listService, $
 
     $scope.submitMutipleDeleteItems = ()  => {
         listService.deleteItem($scope.selectedItems).then(res =>
-            console.log(res )
+            console.log(res)
         ).finally(() => {
             $scope.selectedItems = []
             getListData()
@@ -77,6 +77,7 @@ listModule.controller("listController", function ($scope, $state, listService, $
         listService.getList($stateParams.id).then(res => {
             $scope.list = res.data.list
             $scope.itemsList = res.data.itemsList
+            $scope.listInfos = res.data.listInfos;
             initInfoCalcule($scope.itemsList)
         })
 

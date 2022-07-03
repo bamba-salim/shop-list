@@ -13,32 +13,33 @@
         </div>
         <div class="w-100 col"  ng-if="itemsList.length > 0">
             <div class="{{ cssClass.bloc }}">
-                <row class="row row-cols-3 row-cols-md-3 g-3 text-center">
+                <row class="row row-cols-2 g-3 text-center">
                     <div class="col ">
-                        <div class="border">{{ listInfo.price | number: 2 }} € / totale</div>
-
+                        <div class="border">{{ listInfos.total_price | number: 2 }} € / totale</div>
+                    </div>
+                    <div class="col ">
+                        <div class="border">{{ listInfos.unique_item }} Item différents</div>
                     </div>
                     <div class="col">
-                        <div class="border">{{ listInfo.quantity }} items</div>
-
+                        <div class="border">{{ listInfos.total_item }} items</div>
                     </div>
                     <div class="col">
-                        <div class="border">{{ listInfo.moy | number: 2 }} € / item</div>
+                        <div class="border">{{ listInfos.price_per_item | number: 2 }} € / item</div>
                     </div>
                     <div class="col w-50">
                         <div class="border">
-                            <div class="d-flex justify-content-evenly   align-items-center py-2">
-                                <p class="m-0">{{ listInfo.highest.name }}</p>
-                                <p class="m-0">{{ listInfo.highest.price | number: 2 }} €</p>
+                            <div class="d-flex justify-content-evenly   align-items-center">
+                                <p class="m-0">{{ listInfos.max_price.name }}</p>
+                                <p class="m-0">{{ listInfos.max_price.price | number: 2 }} €</p>
                             </div>
                         </div>
 
                     </div>
                     <div class="col w-50">
                         <div class="border">
-                            <div class="d-flex justify-content-evenly   align-items-center py-2">
-                                <p class="m-0">{{ listInfo.lowest.name }}</p>
-                                <p class="m-0">{{ listInfo.lowest.price | number: 2 }} €</p>
+                            <div class="d-flex justify-content-evenly   align-items-center">
+                                <p class="m-0">{{ listInfos.min_price.name }}</p>
+                                <p class="m-0">{{ listInfos.min_price.price | number: 2 }} €</p>
                             </div>
                         </div>
                     </div>

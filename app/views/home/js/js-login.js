@@ -29,7 +29,10 @@ loginAppModule.controller("loginAppController", function ($scope, loginAppServic
         if($scope.isConnected) $state.go("dashboard")
     }
 
-    $scope.switchLogin = () => $scope.isSignIn = !$scope.isSignIn;
+    $scope.switchLogin = () => {
+        $scope.inputs = {}
+        $scope.isSignIn = !$scope.isSignIn;
+    }
 
     $scope.signinSubmit = () => {
         loginAppService.signIn($scope.inputs).then(res => {

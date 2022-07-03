@@ -12,4 +12,8 @@ abstract class DTO
     {
         return call_user_func(get_called_class() . "::build", $id, (object)$values);
     }
+
+    abstract static public function build($id, $object);
+
+    abstract static public function buildToSave($inputs);
 }
