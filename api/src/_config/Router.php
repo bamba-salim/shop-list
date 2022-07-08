@@ -16,9 +16,9 @@ class Router extends Manager
     public static array $route;
     public static array $results = [];
 
-    public function __construct()
+    public function __construct($route)
     {
-        self::$route = self::route();
+        self::$route = $route;
         self::$results = [];
         self::$params = self::$route[1] ?? null;
         self::$bodyData = self::inputs();
@@ -33,26 +33,30 @@ class Router extends Manager
 
     static function show_routes(){
         Router::addJsonResults("list", $_SESSION['ROUTE_LIST']);
-        Router::RESULTS();
+        Router::run();
+    }
+
+    static function show_server(){
+        Router::addJsonResults("server", $_SERVER);
+        Router::run();
     }
 
     static function works()
     {
         try {
             self::INIT_ROUTE();
-            $router = new Router();
+            $router = new Router(self::route_v1());
             $routeList = array_filter($_SESSION['ROUTE_LIST'], function ($r) {
-                if (empty(self::route())) ExceptionConfig::PAGE_NOT_FOUND()->throws();
-                return $r->name === self::route()[0];
+                if (empty(self::route_v1())) ExceptionConfig::PAGE_NOT_FOUND()->throws();
+                return $r->name === self::route_v1()[0];
             });
 
             ExceptionConfig::RouteNotFound($routeList);
 
             /* @var $route Route */
-
             $route = $routeList[array_keys($routeList)[0]];
             $router::REQ($route->getMethod(), $route->getName(), $route->getClass(), $route->getFunction());
-            $router::RESULTS();
+            $router::run();
 
         } catch (Exception $e) {
             ExceptionConfig::e_error(['error' => $e->getMessage()]);
@@ -113,7 +117,7 @@ class Router extends Manager
         echo json_encode($data);
     }
 
-    public static function RESULTS()
+    public static function run()
     {
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");

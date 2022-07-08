@@ -31,11 +31,4 @@ class Status extends Commons
         self::e_error($this);
     }
 
-    public function throwsJson($message = null, $data = null)
-    {
-        if ($data != null) $this->data = $data;
-        if ($message != null) $this->message = $message;
-        self::$response['error'] = $this;
-    }
-
 }

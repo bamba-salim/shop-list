@@ -38,7 +38,7 @@ class Firebase extends Commons
     protected static function saveOrUpdate($object)
     {
         $table = self::getTableName($object);
-        $path = self::$FIREBASE_URL  . "/$table/$object->id.json";
+        $path = self::$FIREBASE_URL . "/$table/$object->id.json";
         $id = $object->id;
         unset($object->id);
         $grab = call_user_func(self::$model_name . "::_PATCH", $path, json_encode($object));
@@ -48,7 +48,7 @@ class Firebase extends Commons
     protected static function delete($dto, $id)
     {
         $table = self::getTableName($dto);
-        $path = self::$FIREBASE_URL  . "/$table/$id.json";
+        $path = self::$FIREBASE_URL . "/$table/$id.json";
         $grab = call_user_func(self::$model_name . "::_DELETE", $path);
         return $grab;
     }
@@ -74,7 +74,7 @@ class Firebase extends Commons
     {
         $queryVal = urlencode($queryVal);
         $pars = "?orderBy=\"$queryKey\"&equalTo=$queryVal";
-        $path = self::$FIREBASE_URL  . "/$dbPath.json$pars";
+        $path = self::$FIREBASE_URL . "/$dbPath.json$pars";
         return call_user_func(self::$model_name . "::_GET", $path);
     }
 
