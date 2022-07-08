@@ -42,6 +42,11 @@ abstract class ExceptionConfig extends Manager
         return $inputs->$data;
     }
 
+    public static function RouteNotFound(array $route)
+    {
+        if (empty($route)) ExceptionConfig::PAGE_NOT_FOUND()->throws();
+    }
+
     public static function ERR_ARGS_MISS(): Status
     {
         return new Status(400, "Bad Request", "Missing Args !");

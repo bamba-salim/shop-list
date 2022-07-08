@@ -1,5 +1,9 @@
 <?php
 require_once 'Manager.php';
+require_once "ExceptionConfig.php";
+
+
+require_once "./src/_config/Model/Route.php";
 
 Manager::fetchManagerFiles();
 
@@ -9,29 +13,60 @@ class Router extends Manager
     public static $parameters;
     public static $params;
     public static $bodyData;
-    public static $route;
+    public static array $route;
+    public static array $results = [];
 
-    public function __construct($results)
+    public function __construct()
     {
         self::$route = self::route();
-        self::$results = $results;
+        self::$results = [];
         self::$params = self::$route[1] ?? null;
         self::$bodyData = self::inputs();
         self::$parameters = json_decode(json_encode(["params" => self::$params, "data" => self::$bodyData]));
     }
 
-    static function INIT_ROUTE(){
+    static function INIT_ROUTE()
+    {
         $_SESSION['ROUTE_LIST'] = [];
         self::includesRouterFiles();
     }
 
-    static function ROUTES($routesList){
+    static function show_routes(){
+        Router::addJsonResults("list", $_SESSION['ROUTE_LIST']);
+        Router::RESULTS();
+    }
+
+    static function works()
+    {
+        try {
+            self::INIT_ROUTE();
+            $router = new Router();
+            $routeList = array_filter($_SESSION['ROUTE_LIST'], function ($r) {
+                if (empty(self::route())) ExceptionConfig::PAGE_NOT_FOUND()->throws();
+                return $r->name === self::route()[0];
+            });
+
+            ExceptionConfig::RouteNotFound($routeList);
+
+            /* @var $route Route */
+
+            $route = $routeList[array_keys($routeList)[0]];
+            $router::REQ($route->getMethod(), $route->getName(), $route->getClass(), $route->getFunction());
+            $router::RESULTS();
+
+        } catch (Exception $e) {
+            ExceptionConfig::e_error(['error' => $e->getMessage()]);
+        }
+    }
+
+    static function ROUTES($routesList)
+    {
         array_push($_SESSION['ROUTE_LIST'], ...$routesList);
     }
 
-    function REQ($method, $name, $class, $function)
+    static function REQ($method, $name, $class, $function)
     {
-        call_user_func_array([$this, $method], [$name, [$class, $function]]);
+        call_user_func_array(['self', $method], [$name, [$class, $function]]);
     }
 
     static function QUERY($route, $ActionMethod)
@@ -47,7 +82,7 @@ class Router extends Manager
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
         header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, session_user");
-        if (self::$route[0] === $route && $_SERVER['REQUEST_METHOD'] === 'GET') {
+        if ((!empty(self::$route) ? self::$route[0] : "" === $route) && $_SERVER['REQUEST_METHOD'] === 'GET') {
             self::do($ActionMethod, self::$params);
         }
     }
@@ -57,7 +92,7 @@ class Router extends Manager
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
         header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, session_user");
-        if (self::$route[0] === $route && $_SERVER['REQUEST_METHOD'] === 'POST') self::do($ActionMethod, self::$bodyData);
+        if ((!empty(self::$route) ? self::$route[0] : "" === $route) && $_SERVER['REQUEST_METHOD'] === 'POST') self::do($ActionMethod, self::$bodyData);
     }
 
     static function PUT($route, $ActionMethod)
@@ -87,7 +122,8 @@ class Router extends Manager
         echo self::setResults();
     }
 
-    public static function includesRouterFiles(){
+    public static function includesRouterFiles()
+    {
         foreach (scandir('./src/Router') as $router) if (!str_starts_with($router, ".")) include_once "./src/Router/$router";
 
     }

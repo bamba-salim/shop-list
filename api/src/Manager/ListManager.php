@@ -9,12 +9,12 @@ class ListManager extends Manager
     public static function deleteLists($inputs)
     {
         ListModel::deleteListsDB($inputs->idsList);
-        self::addSuccesResults("DELETE", sizeof($inputs->idsList) ." listes ont bien été supprimées !");
+        self::addSuccesResults("DELETE", sizeof($inputs->idsList) . " listes ont bien été supprimées !");
     }
 
     public static function deleteItemList($inputs)
     {
-        ListModel::deleteItemsDB($inputs->idsItem);
+
         self::addSuccesResults("DELETE", sizeof($inputs->idsItem) . " items ont bien été supprimés !");
     }
 
@@ -25,6 +25,7 @@ class ListManager extends Manager
 
     public static function fetchListWithProduct($listID)
     {
+        ExceptionConfig::ArgsException($listID);
         $itemList = ListModel::getItemsByList($listID);
         self::addJsonResults("list", ListModel::getListById($listID));
         self::addJsonResults("listInfos", ListModel::setListInfos($itemList));
@@ -40,7 +41,6 @@ class ListManager extends Manager
     {
         self::addJsonResults("list", ListModel::editItemDB($inputs->itemFormBean));
     }
-
 
 
 }

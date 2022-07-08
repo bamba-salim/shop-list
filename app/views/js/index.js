@@ -30,10 +30,11 @@ app.config(function ($stateProvider, $locationProvider) {
         template: "<h1>cette pas n'existe pas</h1>",
     }
 
-    $stateProvider.state(notFound);
     $stateProvider.state(listState);
     $stateProvider.state(homeState);
     $stateProvider.state(dashboardState);
+    $stateProvider.state(notFound);
+
 })
 
 app.service("appService", function (ws) {

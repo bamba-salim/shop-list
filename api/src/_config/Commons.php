@@ -25,6 +25,11 @@ abstract class Commons
 
     public static function route()
     {
+        return array_values(array_filter(array_map("trim",explode("/", isset($_SERVER['PATH_INFO']) ? filter_var($_SERVER['PATH_INFO']) : "", FILTER_SANITIZE_URL))));
+    }
+
+    protected static function route_v1()
+    {
         return explode("/", isset($_GET['url']) ? filter_var($_GET['url']) : "", FILTER_SANITIZE_URL);
     }
 
