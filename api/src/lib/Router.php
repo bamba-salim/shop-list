@@ -1,4 +1,6 @@
 <?php
+
+namespace App\Config;
 require_once 'Manager.php';
 require_once "ExceptionConfig.php";
 

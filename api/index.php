@@ -3,9 +3,14 @@ if (!isset($_SESSION)) session_start();
 
 date_default_timezone_set("Europe/Paris");
 
-require_once './src/_config/Router.php';
+require "vendor/autoload.php";
 
-Router::works();
+
+$router = new App\lib\Router\Router($_GET['url']);
+
+var_dump($router);
+
+$router->run($_GET['url']);
 
 
 
